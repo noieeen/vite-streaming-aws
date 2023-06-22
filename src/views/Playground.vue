@@ -38,14 +38,16 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import api from "@services/api";
-import playgroundModel from "../models/playground";
+// import api from "@services/api";
+// import playgroundModel from "../models/playground";
 
 const base = ref(0);
 const exponent = ref(0);
 const exponentResult = ref("");
 
-const { calPowerOfMath } = playgroundModel();
+const powerOfMath_url = `https://boza7gp0r1.execute-api.us-east-1.amazonaws.com/dev`;
+
+// const { calPowerOfMath } = playgroundModel();
 
 // callAPI function that takes the base and exponent numbers as parameters
 var calculator = async () => {
@@ -56,17 +58,14 @@ var calculator = async () => {
   // using built in JSON utility package turn object to string and store in a variable
   var raw = JSON.stringify({ base: base.value, exponent: exponent.value });
   // create a JSON object with parameters for API call and store in a variable
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: raw,
     redirect: "follow",
   };
   // make API call with parameters and use promises to get response
-  await fetch(
-    `https://boza7gp0r1.execute-api.us-east-1.amazonaws.com/dev`,
-    requestOptions
-  )
+  await fetch(powerOfMath_url, requestOptions)
     .then((response) => response.text())
     .then((result) => {
       exponentResult.value = JSON.parse(result).body;
