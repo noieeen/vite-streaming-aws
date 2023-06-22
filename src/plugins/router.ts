@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { RouteRecordRaw } from "vue-router";
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: "",
     name: "home",
@@ -10,6 +11,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: () => import("@/views/About.vue"),
+  },
+  {
+    path: "/playground",
+    name: "playground",
+    component: () => import("@/views/Playground.vue"),
   },
 ];
 
